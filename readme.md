@@ -12,7 +12,7 @@ team_id and season_id)
 
 An ER diagram for above mentioned business domain would look something like this:
 
-![alt text](public/images/nba-schema.jpg "ER Diagram")
+![alt text](http://nba.dev/images/nba-schema.jpg "ER Diagram")
 
 #### Applying indexes for query optimization
 
@@ -181,10 +181,11 @@ is the number of elements that need to be sorted.
 
 ### 4. Write a function that sorts 10000 powers (a^b) where a and b are random numbers between 100 and 10000? Estimate how long it would take on your machine?
 At first glance, this problem seems impossible to solve. Calculating the lowest power (which is 100^100) would require quite
-some time (as calculating 3^40 requires approximately 400 thousand years). As such, the algorithm would have time complexity of the order on O(a^b)
+some time (as calculating 3^40 requires approximately 400 thousand years). As such, the algorithm would have time complexity in the order of O(a^b)
 just to calculate the value for the given base (a) and exponent (b) pair. We call this problem NP as it requires polynomial time to check if the result is correct, but exponential time to get the result (we can postpone the task of solving P = NP millennium question to another day).
 But there are techniques which we can use to avoid such high complexity. They are called problem translations. As we know, exponential function is an increasing function and has
-an inverse logarithmic function (which is also increasing). Translating exponential function to a logarithmic one results in fairly easily solvable problem as we can sort the given pairs based on their logarithmic values using any sorting algorithm. Below is the implementation of
+an inverse logarithmic function (which is also increasing). This means than if a1^b1 < a2^b2 holds, then b1 * log(a1) < b2 * log(a2) also holds.
+Translating exponential function to a logarithmic one results in fairly easily solvable problem as we can sort the given pairs based on their logarithmic values using any sorting algorithm. Below is the implementation of
 such algorithm:
 ```php
 function sortExponents(int $amount, int $minRange, int $maxRange, PivotStrategy $pivotStrategy, Partition $partition) {
@@ -210,11 +211,9 @@ function sortExponents(int $amount, int $minRange, int $maxRange, PivotStrategy 
     }, $logarithmicVals));
 }
 ```
-And calling it would require a simple function call:
+As we can see, the amount of overhead we get in comparsion to sorting integers is just in calculating logarithmic values of random numbers a and b.
+This operation adds O(n) to QuickSort time complexity. Calling sortExponents() requires one line of code:
 ```php
 sortExponents(10000, 100, 10000, new RandomPivotIndex, new LomutoPartition);
 ```
-
-
-
 ### 5. write a 1 page high level description of your solution. Answer: - what you've built, which technologies you've used, how it is tied together (your reasons for high-level decisions)

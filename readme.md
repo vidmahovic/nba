@@ -12,7 +12,7 @@ team_id and season_id)
 
 An ER diagram for above mentioned business domain would look something like this:
 
-![alt text](http://nba.dev/images/nba-schema.jpg "ER Diagram")
+![]({% public 'images/nba-schema.jpg' %})  or ![](public/images/nba-schema.jpg) 
 
 #### Applying indexes for query optimization
 

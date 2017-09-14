@@ -4,8 +4,10 @@ namespace Nba\Providers;
 
 use CartHook\Entities\FileEntity;
 use CartHook\Entities\Player;
+use CartHook\Entities\Resources\ApiResource;
 use CartHook\Entities\Resources\FileResource;
 use CartHook\Entities\Resources\Resource;
+use CartHook\Entities\Stats;
 use CartHook\Entities\Team;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,6 +37,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->when(Team::class)
                    ->needs(Resource::class)
                    ->give(FileResource::class);
+
+        $this->app->when(Stats::class)
+                   ->needs(Resource::class)
+                   ->give(ApiResource::class);
 
 //        $this->app->when(FileEntity::class)
 //            ->needs(Resource::class)

@@ -249,5 +249,5 @@ For achieving the principles mentioned above I used these design patterns:
 I tried to stay independent from 3rd party packages and implement features on my own. The files players.json and teams.json serve as a 'database' for
 basketball players and their teams (as I seen in the JS client API implementation). Due to the fact that time was quite limited
 I did not manage to optimize API calls (which take a lot of time) nor could I implement the logic to fetch basketball players or
-teams if they aren't present in JSON files.  
+teams if they aren't present in JSON files. Also, I would love to test everything so I can be sure everything works, but it would take quite some time.
 ####

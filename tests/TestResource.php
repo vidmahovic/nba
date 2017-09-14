@@ -18,7 +18,7 @@ class TestResource extends Resource
         return $this->data;
     }
 
-    public function apply(array $data) {
-        // TODO: override default data...
+    public function apply(array $data) : Resource {
+        $this->data = $data;
     }
 }

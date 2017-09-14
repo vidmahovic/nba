@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('players');
 });
+Route::resource('players', 'PlayersController', ['only' => ['index', 'show']]);

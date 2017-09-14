@@ -217,3 +217,37 @@ This operation adds O(n) to QuickSort time complexity. Calling sortExponents() r
 sortExponents(10000, 100, 10000, new RandomPivotIndex, new LomutoPartition);
 ```
 ### 5. write a 1 page high level description of your solution. Answer: - what you've built, which technologies you've used, how it is tied together (your reasons for high-level decisions)
+#### Domain Definition
+I built a Web Application that displays NBA players and their profiles. At first I did not understand why should I implement any server-side
+logic as the library which was provided along with the instructions had whole client API already implemented. I would only
+require a light front-end app to consume the API and display the results. But with further reading I came across a library
+that the JS client API was built on top of. Looking at the examples of different API implementations for different languages
+I assumed that is the requirement of the assignment. With those assumptions in mind I built a client API using Laravel and consumed it
+using server-side rendering with the help of Blade templating engine and Bootstrap 4 CSS framework. 
+
+#### Application Architecture
+The app front-end is made solely out of HTML, CSS and Blade templating engine which simplifies the use of PHP along with HTML templates. 
+There is a 'welcome' template which represents a container for other views. Components of the views are separated from 
+the views themselves using templates and slots (features of Blade templating engine).
+
+Server-side of the application is built using PHP along with Laravel Framework. It contains all business logic. The development 
+environment resides on Homestead VM and utilizes a LEP part of the LEMP stack (the absence of database removes the M in LEMP). 
+The application design is Domain-Driven which means that objects are represented as business entities using simplified business names. 
+All business logic is stored in a folder called 'CartHook', which means that we can in theory migrate to an entirely different 
+framework without touching business rules (as long as the programming language is the same). This way I managed to separate framework-specific from
+framework agnostic code. I made use of some key principles and design-patterns for object-oriented architecture. The principles I tried to adhere to are:
+- Single Responsibility (which was achieved by separating concerns in the process from fetching data to consuming it in the views)
+- Open-closed principle (typing to interfaces makes the implementations easy to implement)
+- Dependency inversion (I made use of Laravel's Service Container to bind implementations to interfaces when they are needed in the code)
+
+For achieving the principles mentioned above I used these design patterns: 
+- Presenters (that separate presentation of objects from views and make views "dumb") 
+- Transformers (they improve data consistency when the data is fetched from a different source that is not part of the app itself)
+- Entities (they contain core business logic and improve code semantics)
+- Resources (they are responsible for fetching the data from different 3rd party data sources)
+
+I tried to stay independent from 3rd party packages and implement features on my own. The files players.json and teams.json serve as a 'database' for
+basketball players and their teams (as I seen in the JS client API implementation). Due to the fact that time was quite limited
+I did not manage to optimize API calls (which take a lot of time) nor could I implement the logic to fetch basketball players or
+teams if they aren't present in JSON files.  
+####
